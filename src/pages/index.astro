@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPublishedPosts } from '../lib/notion';
+
+const posts = await getPublishedPosts();
+---
+
+<Layout title="홈">
+  {posts.length === 0 && (
+    <p class="text-neutral-400 dark:text-neutral-600 py-16">
+      아직 게시된 글이 없습니다.
+    </p>
+  )}
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10">
+    {posts.map((post) => (
+      <a href={`/posts/${post.slug}`} class="block group">
+        <article>
+          {post.cover && (
+            <img
+              src={post.cover}
+              alt={post.album ?? post.title}
+              class="w-full aspect-square object-cover mb-4"
+              referrerpolicy="no-referrer"
+            />
+          )}
+
+          <div class="flex items-baseline gap-3 mb-1">
+            <time class="text-xs text-neutral-400 dark:text-neutral-500 tabular-nums shrink-0">
+              {post.date}
+            </time>
+            <span class="text-xs text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">
+              {post.category}
+            </span>
+          </div>
+
+          <h2 class="text-lg font-semibold leading-snug group-hover:opacity-60 transition-opacity">
+            {post.title}
+          </h2>
+
+          {post.artist && (
+            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400 font-serif italic">
+              {post.artist}{post.album && ` — ${post.album}`}
+            </p>
+          )}
+
+          <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed line-clamp-2">
+            {post.description}
+          </p>
+
+          {post.tags.length > 0 && (
+            <div class="flex gap-2 mt-2">
+              {post.tags.map((tag) => (
+                <span class="text-xs text-neutral-400 dark:text-neutral-500">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </article>
+      </a>
+    ))}
+  </div>
+</Layout>

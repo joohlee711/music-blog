@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPublishedPosts } from '../../lib/notion';
+import type { Post } from '../../lib/notion';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const tagMap = new Map<string, Post[]>();
+
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      const list = tagMap.get(tag) ?? [];
+      list.push(post);
+      tagMap.set(tag, list);
+    }
+  }
+
+  return [...tagMap.entries()].map(([tag, posts]) => ({
+    params: { tag },
+    props: { tag, posts },
+  }));
+}
+
+const { tag, posts } = Astro.props as { tag: string; posts: Post[] };
+---
+
+<Layout title={`#${tag}`} description={`"${tag}" 태그가 달린 글 모음`}>
+  <a
+    href="/"
+    class="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+  >
+    ← 목록
+  </a>
+
+  <h1 class="text-3xl font-semibold mt-8 mb-12">#{tag}</h1>
+
+  <ul>
+    {posts.map((post, i) => (
+      <li class:list={[
+        "py-8",
+        i !== posts.length - 1 && "border-b border-neutral-200 dark:border-neutral-800"
+      ]}>
+        <a href={`/posts/${post.slug}`} class="block group">
+          <article>
+            <time class="text-sm text-neutral-400 dark:text-neutral-500 tabular-nums">
+              {post.date}
+            </time>
+            <h2 class="text-xl font-semibold mt-1 group-hover:opacity-60 transition-opacity">
+              {post.title}
+            </h2>
+            <p class="mt-2 text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              {post.description}
+            </p>
+          </article>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Layout>

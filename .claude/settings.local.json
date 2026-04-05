@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv /Users/jace/projects/music-blog/CLAUDE.md /tmp/CLAUDE.md.bak)",
+      "Bash(npm create:*)",
+      "Read(//private/tmp/**)",
+      "Bash(rm -rf astro-init)",
+      "Bash(cp:*)",
+      "Bash(npm install:*)",
+      "Bash(npx astro:*)",
+      "Bash(node:*)",
+      "Bash(grep \"QueryDataSource\" node_modules/@notionhq/client/build/src/*.ts)",
+      "Bash(grep \"QueryDataSource\" node_modules/@notionhq/client/src/*.ts)",
+      "Bash(npm run:*)",
+      "Bash(git init:*)",
+      "Bash(git:*)"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = '음악에 대해 씁니다', ogImage } = Astro.props;
+const siteTitle = `${title} | bpm.rand()`;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <title>{siteTitle}</title>
+  </head>
+  <body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 font-sans">
+    <header class="max-w-3xl mx-auto px-6 pt-16 pb-12 text-center">
+      <a href="/" class="text-3xl hover:opacity-60 transition-opacity" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">
+        bpm.rand()
+      </a>
+    </header>
+    <main class="max-w-3xl mx-auto px-6 pb-24">
+      <slot />
+    </main>
+    <footer class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="border-t border-neutral-200 dark:border-neutral-800 pt-6">
+        <p class="text-xs text-neutral-400 dark:text-neutral-600">
+          &copy; {new Date().getFullYear()}
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
