@@ -1,7 +1,7 @@
 # Project: Music Blog Platform
 
 ## Overview
-남자친구를 위한 음악 글쓰기 플랫폼. 주로 앨범 리뷰를 쓰되, 에세이/플레이리스트 등으로 확장 가능한 구조.
+음악 글쓰기 플랫폼. 주로 앨범 리뷰를 쓰되, 에세이/플레이리스트 등으로 확장 가능한 구조.
 
 ## Architecture
 - **Frontend**: Astro (SSG — Static Site Generation)
@@ -13,7 +13,7 @@
 - 완전 정적 사이트 (SSG). 서버 사이드 렌더링 안 씀.
 - Notion에 글 쓰면 → 수동으로 Vercel redeploy (또는 git push)로 반영.
 - SEO 중요: 검색에 잘 걸려야 함. 메타태그, sitemap, OG 태그 필수.
-- 비개발자(남자친구)도 유지보수 가능해야 함 — 코드 구조를 단순하게 유지.
+- 비개발자도 유지보수 가능해야 함 — 코드 구조를 단순하게 유지.
 
 ## Notion DB Schema
 Database name: "블로그 글" (또는 "Posts")
