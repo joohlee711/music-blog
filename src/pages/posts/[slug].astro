@@ -25,6 +25,15 @@ const html = await getPostContent(post.id);
         ← 목록
       </a>
 
+      {post.cover && (
+        <img
+          src={post.cover}
+          alt={post.album ?? post.title}
+          class="w-full mt-8 aspect-square object-cover"
+          referrerpolicy="no-referrer"
+        />
+      )}
+
       <div class="flex items-baseline gap-3 mt-8 mb-4">
         <time class="text-sm text-neutral-400 dark:text-neutral-500 tabular-nums">
           {post.date}
@@ -42,15 +51,6 @@ const html = await getPostContent(post.id);
         <p class="mt-4 text-lg text-neutral-500 dark:text-neutral-400 leading-relaxed">
           {post.description}
         </p>
-      )}
-
-      {post.cover && (
-        <img
-          src={post.cover}
-          alt={post.album ?? post.title}
-          class="w-full mt-10 aspect-square object-cover"
-          referrerpolicy="no-referrer"
-        />
       )}
 
       {(post.artist || post.album || post.rating !== undefined) && (
