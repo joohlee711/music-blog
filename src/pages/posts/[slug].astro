@@ -38,6 +38,12 @@ const html = await getPostContent(post.id);
         {post.title}
       </h1>
 
+      {post.description && (
+        <p class="mt-4 text-lg text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          {post.description}
+        </p>
+      )}
+
       {post.cover && (
         <img
           src={post.cover}
