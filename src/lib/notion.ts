@@ -7,8 +7,8 @@ import type {
 } from '@notionhq/client/build/src/api-endpoints';
 
 // ── 환경변수 검증 ──────────────────────────────────────────
-const NOTION_API_KEY = import.meta.env.NOTION_API_KEY;
-const DATABASE_ID = import.meta.env.NOTION_DATABASE_ID;
+const NOTION_API_KEY = import.meta.env.NOTION_API_KEY?.trim();
+const DATABASE_ID = import.meta.env.NOTION_DATABASE_ID?.trim();
 
 if (!NOTION_API_KEY) {
   throw new Error('NOTION_API_KEY 환경변수가 설정되지 않았습니다. .env 파일을 확인하세요.');
